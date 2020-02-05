@@ -2,6 +2,6 @@ include:
   - local: 'ingress.yml'
 
 ingress-example:
-  <<: *combined-ingress
+  extends: .combined-ingress
   stage: build
 

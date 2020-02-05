@@ -5,5 +5,6 @@
     - oregon-b-shell
   script:
     - mkdir output
+    - git branch --list 'demo/*'
     - docker run -v $(pwd)/output:/output mozmeao/combinedingress:0 "test" "80" "example.org" "demo1" "demo2"
     - cat output/*

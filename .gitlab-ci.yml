@@ -1,0 +1,7 @@
+include:
+  - local: '/ingress.yml'
+
+ingress-example:
+  << *combined-ingress
+  stage: build
+

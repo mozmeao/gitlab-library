@@ -1,0 +1,9 @@
+combined-ingress:
+  # this is a way to ensure only one copy of this job will run at a time.
+  resource_group: combined-ingress
+  tags:
+    - oregon-b-shell
+  script:
+    - mkdir output
+    - docker run -v $(pwd)/output:/output mozmeao/combinedingress:0 "test" "80" "example.org" "demo1" "demo2"
+    - cat output/*

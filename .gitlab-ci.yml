@@ -1,5 +1,5 @@
 include:
-  - local: '/ingress.yml'
+  - local: 'ingress.yml'
 
 ingress-example:
   <<: *combined-ingress

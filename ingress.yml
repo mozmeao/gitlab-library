@@ -1,5 +1,6 @@
 .combined-ingress:
   # this is a way to ensure only one copy of this job will run at a time.
+  stage: build
   resource_group: combined-ingress
   tags:
     - oregon-b-shell

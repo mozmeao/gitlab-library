@@ -3,5 +3,4 @@ include:
 
 ingress-example:
   extends: .combined-ingress
-  stage: build
 

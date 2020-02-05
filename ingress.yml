@@ -1,4 +1,4 @@
-combined-ingress:
+combined-ingress: &combined-ingress
   # this is a way to ensure only one copy of this job will run at a time.
   resource_group: combined-ingress
   tags:

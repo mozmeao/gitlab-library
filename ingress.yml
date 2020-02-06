@@ -17,7 +17,7 @@
     service: library
     domain: example.com
   tags:
-    - oregon-b-shell
+    - iowa-c
   script:
     - mkdir output
     - git fetch --all

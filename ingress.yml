@@ -1,3 +1,7 @@
+variables:
+  us-kube-config: /home/gitlab-runner/.kube/iowa-a.kubeconfig
+
+
 .combined-ingress:
   # this is a way to ensure only one copy of this job will run at a time.
   stage: build
@@ -17,4 +21,5 @@
     - git fetch --all
     - docker pull $image:$version
     - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version $service $port $domain $branch_prefix
-    - cat output/*
+    - export KUBECONFIG=$us-kube-config
+    - kubectl apply -f output/ingress.yml

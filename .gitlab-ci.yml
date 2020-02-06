@@ -6,3 +6,10 @@ ingress-example:
   variables:
     domain: example.org
 
+cleanup:
+  extends: .base_job
+  script:
+    - export KUBECONFIG=$USKUBECONFIG
+    - kubectl delete namespace demo-shared-library
+  tags:
+    - iowa-c

@@ -3,4 +3,6 @@ include:
 
 ingress-example:
   extends: .combined-ingress
+  variables:
+    domain: example.org
 

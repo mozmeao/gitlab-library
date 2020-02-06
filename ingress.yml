@@ -6,14 +6,15 @@
     version: 0.0.4
     image: mozmeao/combinedingress
     GIT_STRATEGY: clone
+    port: 80
+    branch_prefix: demo/
+    service: library
+    domain: example.com
   tags:
     - oregon-b-shell
   script:
     - mkdir output
-    - docker pull $image:$version
-    - git branch
     - git fetch --all
-    - git branch -a
-    - docker run -v $(pwd)/output:/output -v $(pwd):/repo --entrypoint "/bin/bash" $image:$version -c "cd /repo && git branch"
-    - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version test 80 example.org demo/
+    - docker pull $image:$version
+    - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version $service $port $domain $branch_prefix
     - cat output/*

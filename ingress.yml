@@ -1,5 +1,5 @@
 variables:
-  us-kube-config: /home/gitlab-runner/.kube/iowa-a.kubeconfig
+  USKUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
 
 
 .combined-ingress:
@@ -21,5 +21,5 @@ variables:
     - git fetch --all
     - docker pull $image:$version
     - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version $service $port $domain $branch_prefix
-    - export KUBECONFIG=$us-kube-config
+    - export KUBECONFIG=$USKUBECONFIG
     - kubectl apply -f output/ingress.yml

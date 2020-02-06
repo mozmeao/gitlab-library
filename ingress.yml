@@ -7,6 +7,6 @@
   script:
     - mkdir output
     - git fetch
-    - docker pull mozmeao/combinedingress:0
-    - docker run -v $(pwd)/output:/output -v $(pwd):/repo mozmeao/combinedingress:0 "test" "80" "example.org" "demo/"
+    - docker pull mozmeao/combinedingress:0.0.2
+    - docker run -v $(pwd)/output:/output -v $(pwd):/repo mozmeao/combinedingress:0.0.2 "test" "80" "example.org" "demo/"
     - cat output/*

@@ -12,7 +12,7 @@
     - mkdir output
     - docker pull $image:$version
     - git branch
-    - get fetch --all
+    - git fetch --all
     - git branch -a
     - docker run -v $(pwd)/output:/output -v $(pwd):/repo --entrypoint "/bin/bash" $image:$version -c "cd /repo && git branch"
     - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version test 80 example.org demo/

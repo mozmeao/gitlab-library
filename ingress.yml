@@ -27,4 +27,5 @@
     - echo $KUBECONFIG
     - kubectl get po
     - ls output
+    - kubectl create namespace demo-shared-$service
     - kubectl apply -f output/ingress.yml

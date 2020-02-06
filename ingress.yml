@@ -11,7 +11,9 @@
   script:
     - mkdir output
     - docker pull $image:$version
-    - ls
+    - git branch
+    - git branch -a
+    -
     - docker run -v $(pwd)/output:/output -v $(pwd):/repo --entrypoint "/bin/bash" $image:$version -c "cd /repo && git branch"
     - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version test 80 example.org demo/
     - cat output/*

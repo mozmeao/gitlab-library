@@ -4,11 +4,12 @@
   resource_group: combined-ingress
   variables:
     version: 0.0.3
+    image: mozmeao/combinedingress
   tags:
     - oregon-b-shell
   script:
     - mkdir output
-    - git fetch
-    - docker pull mozmeao/combinedingress:$version
-    - docker run -v $(pwd)/output:/output -v $(pwd):/repo mozmeao/combinedingress:$version "test" "80" "example.org" "demo/"
+    - git pull --all
+    - docker pull $image:$version
+    - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version "test" "80" "example.org" "demo/"
     - cat output/*

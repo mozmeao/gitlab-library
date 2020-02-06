@@ -5,7 +5,7 @@
   variables:
     version: 0.0.3
     image: mozmeao/combinedingress
-    GIT_STRATEGY: fetch
+    GIT_STRATEGY: clone
   tags:
     - oregon-b-shell
   script:

@@ -11,5 +11,7 @@
     - mkdir output
     - git fetch --all
     - docker pull $image:$version
+    - ls
+    - docker run -v $(pwd)/output:/output -v $(pwd):/repo --entrypoint "/bin/ls" $image:$version -al /repo
     - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version test 80 example.org demo/
     - cat output/*

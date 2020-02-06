@@ -22,4 +22,7 @@ variables:
     - docker pull $image:$version
     - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version $service $port $domain $branch_prefix
     - export KUBECONFIG=$(USKUBECONFIG)
+    - echo $KUBECONFIG
+    - kubectl get po
+    - ls output
     - kubectl apply -f output/ingress.yml

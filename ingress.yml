@@ -9,7 +9,7 @@
     - oregon-b-shell
   script:
     - mkdir output
-    - git pull --all
+    - git fetch --all
     - docker pull $image:$version
     - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version "test" "80" "example.org" "demo/"
     - cat output/*

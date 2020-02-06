@@ -3,7 +3,7 @@
   stage: build
   resource_group: combined-ingress
   variables:
-    version: 0.0.3
+    version: 0.0.4
     image: mozmeao/combinedingress
     GIT_STRATEGY: clone
   tags:

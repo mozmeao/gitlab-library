@@ -3,8 +3,6 @@ include:
 
 ingress-example:
   extends: .combined-ingress
-  variables:
-    domain: example.org
 
 #cleanup:
 #  extends: .base_job

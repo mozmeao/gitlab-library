@@ -1,7 +1,10 @@
 .base_job:
   variables:
     USKUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
-
+    EUKUBECONFIG: /home/gitlab-runner/.kube/frankfurt.kubeconfig
+  tags:
+    - meao
+    - aws
 
 .combined-ingress:
   extends: .base_job
@@ -16,13 +19,11 @@
     branch_prefix: demo/
     service: library
     domain: example.com
-  tags:
-    - iowa-c
   script:
     - mkdir output
     - git fetch --all
     - docker pull $image:$version
     - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version $service $port $domain $branch_prefix
-    - export KUBECONFIG=$USKUBECONFIG
+    - export KUBECONFIG=$EUKUBECONFIG
     - kubectl create namespace demo-shared-$service || true
     - kubectl apply -f output/ingress.yml

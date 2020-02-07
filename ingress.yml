@@ -18,7 +18,7 @@
     port: 80
     branch_prefix: demo/
     service: library
-    domain: example.com
+    domain: mozmar.org
   script:
     - mkdir output
     - git fetch --all

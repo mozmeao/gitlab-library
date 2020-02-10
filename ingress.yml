@@ -26,5 +26,5 @@
     - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version $service $port $domain $branch_prefix
     - export KUBECONFIG=$EUKUBECONFIG
     - kubectl create namespace demo-shared-$service || true
-    - kubectl create secret --namespace=demo-shared-$service generic acme-account --from-literal=ACME_EMAIL=meao-bots@mozilla.com || true
+    - kubectl create secret --namespace=demo-shared-$service generic acme-account --from-literal=ACME_EMAIL=meao-bots@mozilla.com --from-literal=ACME_SERVER_URL=https://acme-staging-v02.api.letsencrypt.org/directory || true
     - kubectl apply -f output/ingress.yml

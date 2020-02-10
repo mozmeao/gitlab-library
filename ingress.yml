@@ -1,0 +1,30 @@
+.base_job:
+  variables:
+    USKUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
+    EUKUBECONFIG: /home/gitlab-runner/.kube/frankfurt.kubeconfig
+  tags:
+    - meao
+    - aws
+
+.combined-ingress:
+  extends: .base_job
+  # this is a way to ensure only one copy of this job will run at a time.
+  stage: build
+  resource_group: combined-ingress
+  variables:
+    version: 0.0.6
+    image: mozmeao/combinedingress
+    GIT_STRATEGY: clone
+    port: 80
+    branch_prefix: demo/
+    service: library
+    domain: mozmar.org
+  script:
+    - mkdir output
+    - git fetch --all
+    - docker pull $image:$version
+    - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version $service $port $domain $branch_prefix
+    - export KUBECONFIG=$EUKUBECONFIG
+    - kubectl create namespace demo-shared-$service || true
+    - kubectl create secret --namespace=demo-shared-$service generic acme-account --from-literal=ACME_EMAIL=meao-bots@mozilla.com || true
+    - kubectl apply -f output/ingress.yml

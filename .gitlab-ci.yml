@@ -1,0 +1,11 @@
+include:
+  - local: 'ingress.yml'
+
+ingress-example:
+  extends: .combined-ingress
+
+cleanup:
+  extends: .base_job
+  script:
+    - export KUBECONFIG=$EUKUBECONFIG
+    - kubectl delete namespace demo-shared-library

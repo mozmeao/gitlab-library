@@ -8,4 +8,4 @@ cleanup:
   extends: .base_job
   script:
     - export KUBECONFIG=$EUKUBECONFIG
-    - kubectl delete namespace demo-shared-library
+#    - kubectl delete namespace demo-shared-library

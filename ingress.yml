@@ -12,7 +12,7 @@
   stage: build
   resource_group: combined-ingress
   variables:
-    version: 0.0.4
+    version: 0.0.5
     image: mozmeao/combinedingress
     GIT_STRATEGY: clone
     port: 80
@@ -26,4 +26,5 @@
     - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version $service $port $domain $branch_prefix
     - export KUBECONFIG=$EUKUBECONFIG
     - kubectl create namespace demo-shared-$service || true
+    - kubectl create secret --namespace=demo-shared-$service generic acme-account --from-literal=ACME_EMAIL=meao-bots@mozilla.com
     - kubectl apply -f output/ingress.yml

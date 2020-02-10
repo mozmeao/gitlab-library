@@ -12,7 +12,7 @@
   stage: build
   resource_group: combined-ingress
   variables:
-    version: 0.0.5
+    version: 0.0.6
     image: mozmeao/combinedingress
     GIT_STRATEGY: clone
     port: 80

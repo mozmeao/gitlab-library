@@ -12,11 +12,12 @@
   stage: build
   resource_group: combined-ingress
   variables:
-    version: 0.0.6
+    version: 0.0.7
     image: mozmeao/combinedingress
     GIT_STRATEGY: clone
     port: 80
-    branch_prefix: demo/
+    prefix: ''
+    git_prefix: 'demo/'
     service: library
     domain: mozmar.org
     staging: --from-literal=ACME_SERVER_URL=https://acme-staging-v02.api.letsencrypt.org/directory
@@ -24,7 +25,7 @@
     - mkdir output
     - git fetch --all
     - docker pull $image:$version
-    - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version $service $port $domain $branch_prefix
+    - docker run -v $(pwd)/output:/output -v $(pwd):/repo $image:$version $service $port $domain $git_prefix $prefix
     - cat output/ingress.yml
     - export KUBECONFIG=$EUKUBECONFIG
     - kubectl create namespace demo-shared-$service || true

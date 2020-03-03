@@ -1,0 +1,40 @@
+.terraform_base:
+  variables:
+    tf_version: "0.12.20"
+    subdir: "."
+  image:
+    name: hashicorp/terraform:$tf_version
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+
+.terraform_validate:
+  extends: .terraform_base
+  stage: lint
+  script:
+    - cd $subdir
+    - terraform version
+    - terraform init
+    - terraform validate
+
+.terraform_plan:
+  extends: .terraform_base
+  stage: terraform_plan
+  script:
+    - cd $subdir
+    - terraform version
+    - terraform init
+    - terraform plan -out plan.out
+  artifacts:
+    paths:
+      - $subdir/plan.out
+      - $subdir/.terraform
+    expire_in: 1 week
+
+.terraform_apply:
+  extends: .terraform_base
+  stage: terraform_deploy
+  script:
+    - cd $subdir
+    - terraform apply plan.out
+  when: manual

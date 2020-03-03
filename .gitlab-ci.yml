@@ -7,5 +7,5 @@ ingress-example:
 cleanup:
   extends: .base_job
   script:
-    - export KUBECONFIG=$EUKUBECONFIG
-#    - kubectl delete namespace demo-shared-library
+   - export KUBECONFIG=$EUKUBECONFIG
+   - kubectl delete namespace demo-shared-library

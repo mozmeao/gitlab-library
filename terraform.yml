@@ -17,6 +17,17 @@
     - terraform init
     - terraform validate
 
+.terraform_validate_workspace:
+  extends: .terraform_base
+  stage: lint
+  script:
+    - cd $subdir
+    - terraform version
+    - terraform init
+    - export FIRSTWORKSPACE=$(echo $workspaces| cut -d, -f1)
+    - terraform workspace select $FIRSTWORKSPACE
+    - terraform validate
+
 .terraform_plan:
   extends: .terraform_base
   stage: terraform_plan

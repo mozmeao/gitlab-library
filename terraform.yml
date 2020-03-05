@@ -50,11 +50,12 @@
   script:
     - cd $subdir
     - terraform version
-    - terraform init
+
     - mkdir plans
     - mkdir terraforms
     - "for workspace in $(echo $workspaces| sed \"s/,/ /g\"); do"
     - echo $workspace;
+    - terraform init
     - terraform workspace select $workspace;
     - terraform plan -out plans/$workspace.out;
     - mv .terraform terraforms/$workspace

@@ -45,6 +45,8 @@
 .terraform_plan_workspaces:
   extends: .terraform_base
   stage: terraform_plan
+  variables:
+    SHELL: /bin/bash
   script:
     - cd $subdir
     - terraform version

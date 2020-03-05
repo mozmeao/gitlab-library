@@ -52,15 +52,17 @@
     - terraform version
     - terraform init
     - mkdir plans
+    - mkdir terraforms
     - "for workspace in $(echo $workspaces| sed \"s/,/ /g\"); do"
     - echo $workspace;
     - terraform workspace select $workspace;
     - terraform plan -out plans/$workspace.out;
+    - mv .terraform terraforms/$workspace
     - done
   artifacts:
     paths:
       - $subdir/plans
-      - $subdir/.terraform
+      - $subdir/terraforms
     expire_in: 1 week
 
 .terraform_apply:
@@ -79,6 +81,7 @@
     - cd $subdir
     - "for workspace in $(echo $workspaces| sed \"s/,/ /g\"); do"
     - echo $workspace;
+    - mv terraforms/$workspace .terraform
     - terraform apply plans/$workspace.out;
     - done
   when: manual

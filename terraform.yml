@@ -51,8 +51,7 @@
     - cd $subdir
     - terraform version
     - terraform init
-    - "read -r -a workspace_array <<< \"$workspaces\""
-    - for workspace in "${workspace_array[@]}"; do
+    - "for workspace in $(echo $workspaces| sed \"s/,/ /g\"); do"
     - echo $workspace
     - terraform workspace select $workspace;
     - terraform plan -out plans/$workspace.out;

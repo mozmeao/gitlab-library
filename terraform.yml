@@ -42,6 +42,25 @@
       - $subdir/.terraform
     expire_in: 1 week
 
+.terraform_plan_workspaces:
+  extends: .terraform_base
+  stage: terraform_plan
+  script:
+    - cd $subdir
+    - terraform version
+    - terraform init
+    - "read -r -a workspace_array <<< \"$workspaces\""
+    - for workspace in "${workspace_array[@]}"; do
+    - echo $workspace
+    - terraform workspace select $workspace;
+    - terraform plan -out plans/$workspace.out;
+    - done
+  artifacts:
+    paths:
+      - $subdir/plans
+      - $subdir/.terraform
+    expire_in: 1 week
+
 .terraform_apply:
   extends: .terraform_base
   stage: terraform_deploy

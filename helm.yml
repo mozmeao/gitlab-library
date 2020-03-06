@@ -1,0 +1,28 @@
+.helm_base:
+  variables:
+    subdir: "."
+    helm_version: "3.1.1"
+  image:
+    name: alpine/helm:$helm_version
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+
+.helm_deploy_aws:
+  stage: kube_deploy
+  tags:
+    - meao
+    - aws
+  extends:
+    - .helm_base
+  script:
+    - cd $subdir
+    - for kube in $(echo $KUBECONFIGS| sed "s/,/ /g"); do
+    - echo $kube
+    - export KUBECONFIG=$kube;
+    - for f in *.sh; do bash "$f" -H ; done
+    - if ls *.yml 1> /dev/null 2>&1; then
+    - kubectl apply --namespace=$NS -f *.yml
+    - fi
+    - done
+  when: manual

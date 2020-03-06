@@ -17,6 +17,17 @@
     - terraform init
     - terraform validate
 
+.terraform_validate_workspace:
+  extends: .terraform_base
+  stage: lint
+  script:
+    - cd $subdir
+    - terraform version
+    - terraform init
+    - export FIRSTWORKSPACE=$(echo $workspaces| cut -d, -f1)
+    - terraform workspace select $FIRSTWORKSPACE
+    - terraform validate
+
 .terraform_plan:
   extends: .terraform_base
   stage: terraform_plan
@@ -31,10 +42,44 @@
       - $subdir/.terraform
     expire_in: 1 week
 
+.terraform_plan_workspaces:
+  extends: .terraform_base
+  stage: terraform_plan
+  variables:
+    SHELL: /bin/bash
+  script:
+    - cd $subdir
+    - terraform version
+    - terraform init
+    - mkdir plans
+    - for workspace in $(echo $workspaces| sed "s/,/ /g"); do
+    - echo $workspace;
+    - terraform workspace select $workspace;
+    - terraform plan -out plans/$workspace.out;
+    - done
+  artifacts:
+    paths:
+      - $subdir/plans
+      - $subdir/.terraform
+    expire_in: 1 week
+
 .terraform_apply:
   extends: .terraform_base
   stage: terraform_deploy
   script:
     - cd $subdir
     - terraform apply plan.out
+  when: manual
+
+
+.terraform_apply_workspaces:
+  extends: .terraform_base
+  stage: terraform_deploy
+  script:
+    - cd $subdir
+    - for workspace in $(echo $workspaces| sed "s/,/ /g"); do
+    - echo $workspace;
+    - terraform workspace select $workspace
+    - terraform apply plans/$workspace.out;
+    - done
   when: manual

@@ -1,0 +1,12 @@
+.shell_validate:
+  stage: lint
+  variables:
+    version: v0.7.0
+  script:
+    - cd $subdir
+    - for f in *.sh; do shellcheck "$f" ; done
+  image:
+    name: koalaman/shellcheck-alpine:$version
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'

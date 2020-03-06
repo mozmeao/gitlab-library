@@ -1,8 +1,9 @@
 .helm_base:
   variables:
     subdir: "."
+    helm_version: "3.1.1"
   image:
-    name: alpine/helm
+    name: alpine/helm:$helm_version
     entrypoint:
       - '/usr/bin/env'
       - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'

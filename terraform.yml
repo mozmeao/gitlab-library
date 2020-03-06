@@ -52,7 +52,7 @@
     - terraform version
     - terraform init
     - mkdir plans
-    - "for workspace in $(echo $workspaces| sed \"s/,/ /g\"); do"
+    - for workspace in $(echo $workspaces| sed "s/,/ /g"); do
     - echo $workspace;
     - terraform workspace select $workspace;
     - terraform plan -out plans/$workspace.out;
@@ -77,7 +77,7 @@
   stage: terraform_deploy
   script:
     - cd $subdir
-    - "for workspace in $(echo $workspaces| sed \"s/,/ /g\"); do"
+    - for workspace in $(echo $workspaces| sed "s/,/ /g"); do
     - echo $workspace;
     - terraform workspace select $workspace
     - terraform apply plans/$workspace.out;

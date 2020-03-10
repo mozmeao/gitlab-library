@@ -4,7 +4,9 @@
     version: v0.7.0
   script:
     - cd $subdir
+    - if ls *.sh 1> /dev/null 2>&1; then
     - for f in *.sh; do shellcheck "$f" ; done
+    - fi
   image:
     name: koalaman/shellcheck-alpine:$version
     entrypoint:

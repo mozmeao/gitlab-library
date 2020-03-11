@@ -17,14 +17,16 @@
     - .helm_base
   script:
     - cd $subdir
-    - for kube in $(echo $KUBECONFIGS| sed "s/,/ /g"); do
-    - echo $kube
-    - export KUBECONFIG=$kube;
-    - if ls *.sh 1> /dev/null 2>&1; then
-    - for f in *.sh; do bash "$f" -H ; done
-    - fi
-    - if ls *.yml 1> /dev/null 2>&1; then
-    - kubectl apply --namespace=$NS -f *.yml
-    - fi
+    - for kube_kv in $(echo $KUBECONFIGS| sed "s/,/ /g"); do
+    -   export KUBECONFIG=$(echo $kube_kv|cut -f2 -d":");
+    -   export region=$(echo $kube_kv|cut -f1 -d":");
+    -   echo $KUBECONFIG
+    -   echo $region
+    -   if ls *.sh 1> /dev/null 2>&1; then
+    -     for f in *.sh; do bash "$f" -H ; done
+    -   fi
+    -   if ls *.yml 1> /dev/null 2>&1; then
+    -     kubectl apply --namespace=$NS -f *.yml
+    -   fi
     - done
   when: manual

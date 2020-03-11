@@ -26,8 +26,9 @@
     -     for f in *.sh; do bash "$f" -H ; done
     -   fi
     -   if ls *.yml 1> /dev/null 2>&1; then
-    -     sed -i "s/REGION/$region/g" *.yml
-    -     kubectl apply --namespace=$NS -f *.yml
+    -     for f in *.yml; do
+    -     cat f | sed "s/REGION/$region/g" | kubectl apply -f -;
+    -     done
     -   fi
     - done
   when: manual

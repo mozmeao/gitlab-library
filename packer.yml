@@ -1,0 +1,25 @@
+.packer_base:
+  variables:
+    packer_version: "1.5.5"
+    packer_template: "packer.json"
+    subdir: "."
+  image:
+    name: hasicorp/packer:$packer_version
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+
+.packer_validate:
+  extends: .packer_base
+  stage: lint
+  script:
+    - cd $subdir
+    - packer version
+    - packer validate $packer_template
+
+.packer_build:
+  extends: .packer_base
+  stage: packer_build
+  script:
+    - cd $subdir
+    - packer build $packer_template

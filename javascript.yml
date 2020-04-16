@@ -1,0 +1,39 @@
+# Since the jobs have their stages defined here, makes sense for this code to own what stages can exist.
+stages:
+  - lint
+  - build
+  - unitTest
+  - deploy
+
+
+.js_lint:
+  stage: lint
+  variables:
+    eslint_version: "6"
+  script:
+    - docker run --rm -v $(pwd):/data cytopia/eslint:$eslint_version .
+
+.js_build:
+  stage: build
+  variables:
+    node_version: "13.12.0"
+  script:
+    - docker run --user $(id -u):$(id -g) --rm -w="/app" -v $(pwd):/app node:$node_version yarn
+  artifacts:
+    paths:
+      - node_modules
+    expire_in: 1 week
+
+.js_ut:
+  stage: unitTest
+  variables:
+    node_version: "13.12.0"
+  script:
+    - docker run --rm -w="/app" -v $(pwd):/app node:$node_version npm test
+
+.wrangler_deploy:
+  stage: deploy
+  script:
+    - source ~/.cloudflare_secrets
+    - export CF_ZONE_ID=$(printenv $wrangler_env) # Since the zone ID is secret, but changes between deployments, we need to be able to set it.
+    - docker run --rm -w="/app" -v $(pwd):/app -e CF_ZONE_ID -e CF_ACCOUNT_ID -e CF_API_TOKEN mozmeao/wrangler:$wrangler_version publish

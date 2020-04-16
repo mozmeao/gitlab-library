@@ -1,0 +1,11 @@
+.docker_build_publish:
+  stage: docker_build
+  tags:
+    - meao
+    - aws
+  script:
+    - cd $subdir
+    - docker build -t $image_name:latest -t $image_name:$version --build-arg version=$version $build_args .
+    - docker push $image_name:$version
+    - docker push $image_name:latest
+

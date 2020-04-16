@@ -1,11 +1,16 @@
-.docker_build_publish:
+# This is an opinionated (read, very likely just wrong :) ) job to build and publish a docker container, with $version
+# supplied by the extending pipeline, and one additional tag, likely latest.  It's intended to be at least a little reusable
+# but you should make sure it fits your need before using. see gitlab-library issue 11 for work to future proof this code.
+.docker_build_publish_version_and_addtl_tag:
   stage: docker_build
   tags:
     - meao
     - aws
+  variables:
+    additional_tag: "latest"
   script:
     - cd $subdir
-    - docker build -t $image_name:latest -t $image_name:$version --build-arg version=$version $build_args .
+    - docker build -t $image_name:$additional_tag -t $image_name:$version --build-arg version=$version $build_args .
     - docker push $image_name:$version
-    - docker push $image_name:latest
+    - docker push $image_name:$additional_tag
 

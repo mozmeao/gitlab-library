@@ -36,4 +36,4 @@ stages:
   script:
     - source ~/.cloudflare_secrets
     - export CF_ZONE_ID=$(printenv $wrangler_env) # Since the zone ID is secret, but changes between deployments, we need to be able to set it.
-    - docker run --rm -w="/app" -v $(pwd):/app -e CF_ZONE_ID -e CF_ACCOUNT_ID -e CF_API_TOKEN mozmeao/wrangler:$wrangler_version publish
+    - docker run --rm -w="/app" -v $(pwd):/app -e CF_ZONE_ID -e CF_ACCOUNT_ID -e CF_API_TOKEN mozmeao/wrangler:$wrangler_version publish --env $publish_env

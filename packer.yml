@@ -4,7 +4,7 @@
     packer_template: "packer.json"
     subdir: "."
   image:
-    name: hashicorp/packer:$packer_version
+    name: mozmeao/packer_ansible:$packer_version
     entrypoint:
       - '/usr/bin/env'
       - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'

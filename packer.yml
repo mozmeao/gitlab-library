@@ -24,4 +24,7 @@
   stage: packer_build
   script:
     - cd $subdir
+    - apk update && apk add ansible
+    - ansible --version
+    - packer version
     - packer build $packer_template

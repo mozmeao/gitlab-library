@@ -14,6 +14,8 @@
   stage: lint
   script:
     - cd $subdir
+    - apk update && apk add ansible
+    - ansible --version
     - packer version
     - packer validate $packer_template
 

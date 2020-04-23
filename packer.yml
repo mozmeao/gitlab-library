@@ -22,6 +22,7 @@
 .packer_build:
   extends: .packer_base
   stage: packer_build
+  when: manual
   script:
     - cd $subdir
     - apk update && apk add ansible

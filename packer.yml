@@ -25,7 +25,7 @@
   when: manual
   script:
     - cd $subdir
-    - apk update && apk add ansible
+    - apk update && apk add ansible rsync
     - ansible --version
     - packer version
     - packer build $packer_template

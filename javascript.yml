@@ -22,7 +22,7 @@ stages:
   artifacts:
     paths:
       - node_modules
-      - *.toml
+      - '*.toml'
     expire_in: 1 week
 
 .js_ut:

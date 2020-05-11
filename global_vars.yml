@@ -1,0 +1,9 @@
+.gcp_runner:
+  tags:
+    - iowa-c
+
+.aws_runner:
+  tags:
+    - mozmeao
+    - aws
+    - generic

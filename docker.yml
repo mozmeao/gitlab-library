@@ -1,11 +1,14 @@
+include:
+  - local: "global_vars.yml"
+
+
 # This is an opinionated (read, very likely just wrong :) ) job to build and publish a docker container, with $version
 # supplied by the extending pipeline, and one additional tag, likely latest.  It's intended to be at least a little reusable
 # but you should make sure it fits your need before using. see gitlab-library issue 11 for work to future proof this code.
 .docker_build_publish_version_and_addtl_tag:
   stage: docker_build
-  tags:
-    - meao
-    - aws
+  extends:
+    - .aws_runner
   variables:
     additional_tag: "latest"
   script:

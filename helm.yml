@@ -1,4 +1,9 @@
+include:
+  - local: "global_vars.yml"
+
 .helm_base:
+  extends:
+    - .aws_runner
   variables:
     subdir: "."
     helm_version: "3.1.1"
@@ -10,9 +15,6 @@
 
 .helm_deploy_aws:
   stage: kube_deploy
-  tags:
-    - meao
-    - aws
   extends:
     - .helm_base
   script:

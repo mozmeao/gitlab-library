@@ -1,10 +1,12 @@
+include:
+  - local: "global_vars.yml"
+
 .base_job:
   variables:
     USKUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
     EUKUBECONFIG: /home/gitlab-runner/.kube/frankfurt.kubeconfig
-  tags:
-    - meao
-    - aws
+  extends:
+    - .aws_runner
 
 .combined-ingress:
   extends: .base_job

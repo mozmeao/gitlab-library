@@ -1,25 +1,17 @@
 include:
   - project: 'mozmeao/gitlab-library'
     file: "global_vars.yml"
-    ref: runner_vars
   - project: 'mozmeao/gitlab-library'
     file: "jobs/docker.yml"
-    ref: runner_vars
   - project: 'mozmeao/gitlab-library'
     file: "jobs/helm.yml"
-    ref: runner_vars
   - project: 'mozmeao/gitlab-library'
     file: "jobs/ingress.yml"
-    ref: runner_vars
   - project: 'mozmeao/gitlab-library'
     file: "jobs/javascript.yml"
-    ref: runner_vars
   - project: 'mozmeao/gitlab-library'
     file: "jobs/linters.yml"
-    ref: runner_vars
   - project: 'mozmeao/gitlab-library'
     file: "jobs/packer.yml"
-    ref: runner_vars
   - project: 'mozmeao/gitlab-library'
     file: "jobs/terraform.yml"
-    ref: runner_vars

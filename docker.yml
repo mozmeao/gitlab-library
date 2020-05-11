@@ -1,8 +1,7 @@
 include:
   - project: 'mozmeao/gitlab-library'
     file: "global_vars.yml"
-    ref: "runner_vars"
-
+    ref: runner_vars
 
 
 # This is an opinionated (read, very likely just wrong :) ) job to build and publish a docker container, with $version

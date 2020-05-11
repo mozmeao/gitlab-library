@@ -1,6 +1,7 @@
 include:
   - project: 'mozmeao/gitlab-library'
     file: "global_vars.yml"
+    ref: "runner_vars"
 
 .helm_base:
   extends:

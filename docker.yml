@@ -1,5 +1,7 @@
 include:
-  - local: "global_vars.yml"
+  - project: 'mozmeao/gitlab-library'
+    file: "global_vars.yml"
+
 
 
 # This is an opinionated (read, very likely just wrong :) ) job to build and publish a docker container, with $version

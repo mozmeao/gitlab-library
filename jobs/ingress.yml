@@ -1,8 +1,3 @@
-include:
-  - project: 'mozmeao/gitlab-library'
-    file: "global_vars.yml"
-    ref: runner_vars
-
 .base_job:
   variables:
     USKUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig

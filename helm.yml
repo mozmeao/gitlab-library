@@ -17,18 +17,17 @@
     - .helm_base
   script:
     - cd $subdir
-    - ": \"${VERSION:=latest}\""
     - for kube_kv in $(echo $KUBECONFIGS| sed "s/,/ /g"); do
     -   export KUBECONFIG=$(echo $kube_kv|cut -f2 -d":");
-    -   export region=$(echo $kube_kv|cut -f1 -d":");
+    -   export REGION=$(echo $kube_kv|cut -f1 -d":");
     -   echo $KUBECONFIG
-    -   echo $region
+    -   echo $REGION
     -   if ls *.sh 1> /dev/null 2>&1; then
     -     for f in *.sh; do bash "$f" -H ; done
     -   fi
     -   if ls *.yml 1> /dev/null 2>&1; then
     -     for f in *.yml; do
-    -       cat "$f" | sed "s/REGION/$region/g;s/VERSION/$VERSION/g" | kubectl apply --namespace=$NS -f - ;
+    -       envsubst <"$f" | kubectl apply --namespace=$NS -f - ;
     -     done
     -   fi
     - done

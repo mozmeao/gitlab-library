@@ -55,6 +55,7 @@
     - for workspace in $(echo $workspaces| sed "s/,/ /g"); do
     - echo $workspace;
     - terraform workspace select $workspace;
+    - terraform init
     - terraform plan -out plans/$workspace.out;
     - done
   artifacts:

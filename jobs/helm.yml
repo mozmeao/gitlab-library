@@ -24,6 +24,10 @@
     -   if ls *.sh 1> /dev/null 2>&1; then
     -     for f in *.sh; do bash "$f" -H ; done
     -   fi
+    -   envfile="env/$ENV/$REGION"
+    -   if ls "$envfile" 1> /dev/null 2>&1; then
+    -     source "$envfile";
+    -   fi
     -   if ls *.yml 1> /dev/null 2>&1; then
     -     for f in *.yml; do
     -       envsubst <"$f" | kubectl apply --namespace=$NS -f - ;

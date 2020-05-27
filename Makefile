@@ -5,7 +5,7 @@ VERSION := `cat VERSION`
 
 build:
 	@echo "assiging version" $(VERSION)
-	envsubst < "job_imports.yml.tmpl" > "job_imports.yml"
+	VERSION=$(VERSION) envsubst < "job_imports.yml.tmpl" > "job_imports.yml"
 
 tag:
 	git tag $(VERSION)

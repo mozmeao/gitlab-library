@@ -81,6 +81,7 @@
     - for workspace in $(echo $workspaces| sed "s/,/ /g"); do
     - echo $workspace;
     - terraform workspace select $workspace
+    - terraform init
     - terraform apply plans/$workspace.out;
     - done
   when: manual

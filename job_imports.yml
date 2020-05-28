@@ -1,17 +1,9 @@
 include:
-  - project: 'mozmeao/gitlab-library'
-    file: "global_vars.yml"
-  - project: 'mozmeao/gitlab-library'
-    file: "jobs/docker.yml"
-  - project: 'mozmeao/gitlab-library'
-    file: "jobs/helm.yml"
-  - project: 'mozmeao/gitlab-library'
-    file: "jobs/ingress.yml"
-  - project: 'mozmeao/gitlab-library'
-    file: "jobs/javascript.yml"
-  - project: 'mozmeao/gitlab-library'
-    file: "jobs/linters.yml"
-  - project: 'mozmeao/gitlab-library'
-    file: "jobs/packer.yml"
-  - project: 'mozmeao/gitlab-library'
-    file: "jobs/terraform.yml"
+  - remote: "https://raw.githubusercontent.com/mozmeao/gitlab-library/v1.1.0/global_vars.yml"
+  - remote: "https://raw.githubusercontent.com/mozmeao/gitlab-library/v1.1.0/jobs/docker.yml"
+  - remote: "https://raw.githubusercontent.com/mozmeao/gitlab-library/v1.1.0/jobs/helm.yml"
+  - remote: "https://raw.githubusercontent.com/mozmeao/gitlab-library/v1.1.0/jobs/ingress.yml"
+  - remote: "https://raw.githubusercontent.com/mozmeao/gitlab-library/v1.1.0/jobs/javascript.yml"
+  - remote: "https://raw.githubusercontent.com/mozmeao/gitlab-library/v1.1.0/jobs/linters.yml"
+  - remote: "https://raw.githubusercontent.com/mozmeao/gitlab-library/v1.1.0/jobs/packer.yml"
+  - remote: "https://raw.githubusercontent.com/mozmeao/gitlab-library/v1.1.0/jobs/terraform.yml"
